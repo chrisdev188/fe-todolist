@@ -41,6 +41,10 @@ const TodoList = (props: Props) => {
     setTodoList((prev) => prev.filter((todo) => todo.id !== id));
   };
 
+  const handleDeleteCompleteds = () => {
+    setTodoList((prev) => prev.filter((todo) => todo.completed === false));
+  };
+
   return (
     <div className="relative z-20 shadow-md rounded-md overflow-hidden">
       <ul>
@@ -75,7 +79,7 @@ const TodoList = (props: Props) => {
         <div className="hidden sm:block">
           <FilterBar />
         </div>
-        <ClearCompletedButton />
+        <ClearCompletedButton handleDeleteCompleteds={handleDeleteCompleteds} />
       </div>
     </div>
   );

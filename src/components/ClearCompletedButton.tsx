@@ -1,7 +1,11 @@
-type Props = {};
+type Props = {
+  handleDeleteCompleteds: () => void;
+};
 
 const ClearCompletedButton = (props: Props) => {
-  return <button>Clear Completed</button>;
+  return (
+    <button onClick={props.handleDeleteCompleteds}>Clear Completed</button>
+  );
 };
 
 export default ClearCompletedButton;
