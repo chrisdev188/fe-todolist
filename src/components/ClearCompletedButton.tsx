@@ -4,7 +4,12 @@ type Props = {
 
 const ClearCompletedButton = (props: Props) => {
   return (
-    <button onClick={props.handleDeleteCompleteds}>Clear Completed</button>
+    <button
+      onClick={props.handleDeleteCompleteds}
+      className="dark:hover:text-[#E3E4F1] transition-all"
+    >
+      Clear Completed
+    </button>
   );
 };
 

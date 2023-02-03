@@ -12,7 +12,7 @@ const FilterBar = (props: Props) => {
       {props.filterOptions.map((option, index) => (
         <button
           key={index}
-          className={`hover:text-[#494C6B] transition-all capitalize ${
+          className={`hover:text-[#494C6B] dark:hover:text-[#E3E4F1] transition-all capitalize ${
             props.filterText === option && "text-[#3A7CFD]"
           }`}
           onClick={() => props.handleChangeFilter(option as FilterText)}

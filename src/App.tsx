@@ -18,7 +18,6 @@ export type Todo = {
   title: string;
   completed: boolean;
 };
-
 const mockTodos: Todo[] = [
   { id: 1, title: "Learn React", completed: false },
   { id: 2, title: "Do 10 pushups", completed: false },
@@ -36,12 +35,28 @@ const App = () => {
       }
     })() || mockTodos
   );
+  const [isDark, setIsDark] = useState<boolean>(
+    (() => {
+      const value = localStorage.getItem("mode");
+      if (typeof value === "string") {
+        return JSON.parse(value);
+      }
+    })() || false
+  );
   const [filterText, setFilterText] = useState<FilterText>("all");
   const [text, setText] = useState("");
 
   useEffect(() => {
     localStorage.setItem("todoList", JSON.stringify(todoList));
   }, [todoList]);
+
+  useEffect(() => {
+    localStorage.setItem("mode", JSON.stringify(isDark));
+  }, [isDark]);
+
+  const handleChangeMode = () => {
+    setIsDark((prev) => !prev);
+  };
 
   const handleChangeFilter = (text: FilterText) => {
     setFilterText(text);
@@ -81,32 +96,36 @@ const App = () => {
   };
 
   return (
-    <div className="px-6 py-12 font-sans min-h-screen bg-slate-100 md:py-20">
-      <BackgroundImage />
-      <div className="max-w-xl mx-auto">
-        <Header />
-        <TodoCreator
-          text={text}
-          handleChangeText={handleChangeText}
-          handleCreateTodo={handleCreateTodo}
-        />
-        <TodoList
-          filterText={filterText}
-          filterOptions={filterOptions}
-          handleChangeFilter={handleChangeFilter}
-          handleChange={handleChange}
-          handleDelete={handleDelete}
-          handleDeleteCompleteds={handleDeleteCompleteds}
-          todoList={todoList}
-        />
-        <div className="bg-white shadow-md p-3 mt-4 rounded-md sm:hidden">
-          <FilterBar
+    <div className={`${isDark ? "dark" : ""}`}>
+      <div
+        className={`px-6 py-12 font-sans min-h-screen bg-slate-100 dark:bg-[#171823] md:py-20`}
+      >
+        <BackgroundImage />
+        <div className="max-w-xl mx-auto">
+          <Header handleChangeMode={handleChangeMode} isDark={isDark} />
+          <TodoCreator
+            text={text}
+            handleChangeText={handleChangeText}
+            handleCreateTodo={handleCreateTodo}
+          />
+          <TodoList
             filterText={filterText}
             filterOptions={filterOptions}
             handleChangeFilter={handleChangeFilter}
+            handleChange={handleChange}
+            handleDelete={handleDelete}
+            handleDeleteCompleteds={handleDeleteCompleteds}
+            todoList={todoList}
           />
+          <div className="bg-white shadow-md p-3 mt-4 rounded-md sm:hidden">
+            <FilterBar
+              filterText={filterText}
+              filterOptions={filterOptions}
+              handleChangeFilter={handleChangeFilter}
+            />
+          </div>
+          <InstructionText />
         </div>
-        <InstructionText />
       </div>
     </div>
   );

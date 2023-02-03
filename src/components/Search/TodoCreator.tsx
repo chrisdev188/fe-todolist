@@ -13,7 +13,7 @@ const TodoCreator = (props: Props) => {
         <input
           type="text"
           placeholder="Create a new todo..."
-          className="w-full pl-12 pr-4 py-4 rounded-md text-xs md:text-base font-light bg-white"
+          className="w-full pl-12 pr-4 py-4 rounded-md text-xs md:text-base font-light bg-white dark:bg-[#25273D] dark:caret-slate-200 dark:text-[#E3E4F1]"
           name="title"
           value={props.text}
           onChange={props.handleChangeText}
