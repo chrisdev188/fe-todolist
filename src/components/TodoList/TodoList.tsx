@@ -40,7 +40,13 @@ const TodoList = (props: Props) => {
                     checked={todo.completed}
                     onChange={(e) => props.handleChange(e, todo.id)}
                   />
-                  <span className="capitalize text-[#494C6B] flex items-center md:text-base">
+                  <span
+                    className={`capitalize flex items-center md:text-base ${
+                      todo.completed
+                        ? "text-[#D1D2DA] line-through"
+                        : "text-[#494C6B]"
+                    }`}
+                  >
                     {todo.title}
                   </span>
                   <button

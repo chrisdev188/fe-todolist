@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   BackgroundImage,
   FilterBar,
@@ -28,9 +28,18 @@ const mockTodos: Todo[] = [
 ];
 
 const App = () => {
-  const [todoList, setTodoList] = useState<Todo[]>(mockTodos);
+  const [todoList, setTodoList] = useState<Todo[]>(() => {
+    const value = localStorage.getItem("todoList");
+    if (typeof value === "string") {
+      return JSON.parse(value);
+    }
+  });
   const [filterText, setFilterText] = useState<FilterText>("all");
   const [text, setText] = useState("");
+
+  useEffect(() => {
+    localStorage.setItem("todoList", JSON.stringify(todoList));
+  }, [todoList]);
 
   const handleChangeFilter = (text: FilterText) => {
     setFilterText(text);

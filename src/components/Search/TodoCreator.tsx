@@ -17,6 +17,7 @@ const TodoCreator = (props: Props) => {
           name="title"
           value={props.text}
           onChange={props.handleChangeText}
+          required
         />
       </form>
     </div>
