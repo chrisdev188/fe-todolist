@@ -30,8 +30,8 @@ const TodoList = (props: Props) => {
         <ul>
           {filteredTodos.map((todo) => {
             return (
-              <li key={todo.id}>
-                <label className="group bg-white p-4 border-b border-solid border-[#E3E4F1] grid grid-cols-todo-item gap-4 text-xs isolate">
+              <li key={todo.id} className="group cursor-pointer">
+                <label className="bg-white p-4 border-b border-solid border-[#E3E4F1] grid grid-cols-todo-item gap-4 text-xs isolate">
                   <input
                     type="checkbox"
                     name=""

@@ -28,12 +28,14 @@ const mockTodos: Todo[] = [
 ];
 
 const App = () => {
-  const [todoList, setTodoList] = useState<Todo[]>(() => {
-    const value = localStorage.getItem("todoList");
-    if (typeof value === "string") {
-      return JSON.parse(value);
-    }
-  });
+  const [todoList, setTodoList] = useState<Todo[]>(
+    (() => {
+      const value = localStorage.getItem("todoList");
+      if (typeof value === "string") {
+        return JSON.parse(value);
+      }
+    })() || mockTodos
+  );
   const [filterText, setFilterText] = useState<FilterText>("all");
   const [text, setText] = useState("");
 
